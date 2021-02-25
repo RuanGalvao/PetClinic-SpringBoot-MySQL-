@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+      
+  petclinic:
+    build: .
+    image: petclinic:petProject
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      - MYSQL_ROOT_PASSWORD=${ROOT}
+      - MYSQL_USER=${USER}
+      - MYSQL_PASSWORD=${PASS}
+      - MYSQL_DATABASE=${DATABASE}
+    networks:
+      - net-backend
+    depends_on:
+      - db
+
+  db:
+    image: ${VERSION}
+    container_name: db
+    restart: always
+    ports:
+      - 4407:4407
+    environment:
+      - MYSQL_ROOT_PASSWORD=${ROOT}
+      - MYSQL_USER=${USER}
+      - MYSQL_PASSWORD=${PASS}
+      - MYSQL_DATABASE=${DATABASE}
+      - MYSQL_TCP_PORT=${PORTS}
+    volumes:
+      - "./conf.d:/etc/mysql/conf.d:ro"
+    networks:
+      - net-backend
+
+networks:
+  net-backend:
