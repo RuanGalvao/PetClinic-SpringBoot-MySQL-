@@ -18,6 +18,7 @@ services:
     volumes:
       - jenkins-data:/var/jenkins_home
       - jenkins-home:/home
+    
 
 
   nexus:
@@ -32,25 +33,38 @@ services:
 
   sonarqube:
     image: sonarqube
-    container_name: sonarqube
+    expose:
+      - 9000
     ports:
-      - "9000:9000"
+      - "127.0.0.1:9000:9000"
+    networks:
+      - sonarnet
     environment:
-      - sonar.jdbc.url=jdbc:postgresql://dbsonar:5432/sonar
+      - sonar.jdbc.url=jdbc:postgresql://dbSonar:5432/sonar
+      - sonar.jdbc.username=sonar
+      - sonar.jdbc.password=sonar
     volumes:
       - sonarqube_conf:/opt/sonarqube/conf
       - sonarqube_data:/opt/sonarqube/data
       - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
 
-  dbsonar:
+  dbSonar:
     image: postgres
+    networks:
+      - sonarnet
     environment:
       - POSTGRES_USER=sonar
       - POSTGRES_PASSWORD=sonar
     volumes:
       - postgresql:/var/lib/postgresql
-      # This needs explicit mapping due to https://github.com/docker-library/postgres/blob/4e48e3228a30763913ece952c611e5e9b95c8759/Dockerfile.template#L52
       - postgresql_data:/var/lib/postgresql/data
+
+networks:
+  sonarnet:
+networks:
+  sonarnet:
+    
 
 volumes:
   nexus-data: {}
@@ -59,5 +73,7 @@ volumes:
   sonarqube_conf: {}
   sonarqube_data: {}
   sonarqube_extensions: {}
+  sonarqube_bundled-plugins:
   postgresql: {}
   postgresql_data: {}
+
