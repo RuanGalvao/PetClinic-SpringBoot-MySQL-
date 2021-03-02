@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage ('Checkout') {
           steps {
-            git 'https://github.com/romuloslv/spring-petclinic.git'
+            git 'https://github.com/RuanGalvao/PetClinic-SpringBoot-MySQL-'
           }
         }
         stage('Build') {
