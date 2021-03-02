@@ -9,27 +9,28 @@ services:
     ports:
       - 8050:8080
     environment:
-      - MYSQL_ROOT_PASSWORD=${ROOT}
-      - MYSQL_USER=${USER}
-      - MYSQL_PASSWORD=${PASS}
-      - MYSQL_DATABASE=${DATABASE}
+      - MYSQL_ROOT_PASSWORD=senhadoroot
+      - MYSQL_USER=petclinic
+      - MYSQL_PASSWORD=petclinic
+      - MYSQL_DATABASE=petclinic
+      - MYSQL_TCP_PORT=4407
     networks:
       - net-backend
     depends_on:
       - db
 
   db:
-    image: ${VERSION}
+    image: mysql:5.7
     container_name: db
     restart: always
     ports:
       - 4407:4407
     environment:
-      - MYSQL_ROOT_PASSWORD=${ROOT}
-      - MYSQL_USER=${USER}
-      - MYSQL_PASSWORD=${PASS}
-      - MYSQL_DATABASE=${DATABASE}
-      - MYSQL_TCP_PORT=${PORTS}
+      - MYSQL_ROOT_PASSWORD=senhadoroot
+      - MYSQL_USER=petclinic
+      - MYSQL_PASSWORD=petclinic
+      - MYSQL_DATABASE=petclinic
+      - MYSQL_TCP_PORT=4407
     volumes:
       - "./conf.d:/etc/mysql/conf.d:ro"
     networks:

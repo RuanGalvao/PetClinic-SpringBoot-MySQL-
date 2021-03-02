@@ -19,8 +19,6 @@ services:
       - jenkins-data:/var/jenkins_home
       - jenkins-home:/home
     
-
-
   nexus:
     image: sonatype/nexus3
     container_name: nexus
