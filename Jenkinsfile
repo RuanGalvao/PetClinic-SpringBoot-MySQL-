@@ -16,8 +16,8 @@ pipeline {
         stage('Build') {
             //agent { docker 'maven:3.6-jdk-8' }
             steps {
-                sh 'mvn package -DskipTests=true'
-                sh 'mvn package -Dcheckstyle=true'
+                sh 'mvn package -DskipTests=true -Dcheckstyle=true'
+                
             }
         }
         stage('Test') {
