@@ -20,19 +20,13 @@ pipeline {
                 
             }
         }
-        }
-        stage('SonarQube analysis') {
+        stage('Test') {
             steps {
-                withSonarQubeEnv('SonarQube') {
+               withSonarQubeEnv('SonarQube') {
                     sh "./gradlew sonarqube"
-                }
+                }   
             }
-        }
-        stage("Quality gate") {
-            steps {
-                waitForQualityGate abortPipeline: true
-            }
-           } 
+	}
         stage("Publish to nexus") {
             //when {
             //    branch 'master' 
@@ -72,3 +66,4 @@ pipeline {
             }
         }
     }
+}
