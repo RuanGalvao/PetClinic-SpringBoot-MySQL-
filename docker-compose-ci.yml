@@ -12,7 +12,9 @@ services:
     ports:
       - "9090:8080"
       - "8443:8443"
-      - "50000:50000"  
+      - "50000:50000"
+    networks:
+      - sonarnet  
     expose:
       - "9090"
     volumes:
@@ -26,6 +28,8 @@ services:
       - "nexus-data:/nexus-data"
     ports:
       - "8081:8081"
+    networks:
+      - sonarnet
     expose:
       - "8081"
 

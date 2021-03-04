@@ -20,11 +20,19 @@ pipeline {
                 
             }
         }
-        stage('Test') {
+         }
+        stage('SonarQube analysis') {
             steps {
-                sh '/var/jenkins_home/sonar-scanner/bin/sonar-scanner'   
+                withSonarQubeEnv('SonarQube') {
+                    sh "./gradlew sonarqube"
+                }
             }
-	}
+        }
+        stage("Quality gate") {
+            steps {
+                waitForQualityGate abortPipeline: true
+            }
+           } 
         stage("Publish to nexus") {
             //when {
             //    branch 'master' 
