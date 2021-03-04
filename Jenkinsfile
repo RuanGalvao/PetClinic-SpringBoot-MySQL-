@@ -20,7 +20,7 @@ pipeline {
                 
             }
         }
-         }
+        }
         stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
@@ -72,4 +72,3 @@ pipeline {
             }
         }
     }
-}
