@@ -23,7 +23,7 @@ pipeline {
         stage('Test') {
             steps {
                withSonarQubeEnv('SonarQube') {
-                    sh "./gradlew sonarqube"
+                    sh '/var/jenkins_home/sonar-scanner/bin/sonar-scanner'
                 }   
             }
 	}

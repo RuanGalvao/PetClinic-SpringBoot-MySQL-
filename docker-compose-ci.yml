@@ -63,10 +63,7 @@ services:
       - postgresql_data:/var/lib/postgresql/data
 
 networks:
-  sonarnet:
-networks:
-  sonarnet:
-    
+  sonarnet:  
 
 volumes:
   nexus-data: {}
