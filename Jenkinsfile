@@ -4,7 +4,7 @@ pipeline {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
         NEXUS_URL = "localhost:8081"
-        NEXUS_REPOSITORY = "spring-petclinic"
+        NEXUS_REPOSITORY = "Spring-Petclinic"
         NEXUS_CREDENTIAL_ID = "nexus"
     }
     stages {
