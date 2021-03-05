@@ -4,7 +4,7 @@ pipeline {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
         NEXUS_URL = "localhost:8081"
-        NEXUS_REPOSITORY = "Spring-Petclinic"
+        NEXUS_REPOSITORY = "spring-petclinic"
         NEXUS_CREDENTIAL_ID = "nexus"
     }
     stages {
@@ -14,16 +14,14 @@ pipeline {
           }
         }
         stage('Build') {
-            //agent { docker 'maven:3.6-jdk-8' }
+            agent { docker 'maven:3.6-jdk-8' }
             steps {
-                sh 'mvn package -DskipTests=true -Dcheckstyle=true'
-                
+                sh 'mvn package -DskipTests=true'
             }
         }
         stage('Test') {
             steps {
-                sh '/var/jenkins_home/sonar-scanner/bin/sonar-scanner'
-                }   
+                sh '/var/jenkins_home/sonar-scanner/bin/sonar-scanner'   
             }
 	}
         stage("Publish to nexus") {
