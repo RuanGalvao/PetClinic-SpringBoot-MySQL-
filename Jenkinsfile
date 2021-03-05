@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'mvn clean verify sonar:sonar -Dsonar.host.url=http://localhost:9000 -DskipTests=true'   
+                sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar -DskipTests=true'   
             }
 	}
         stage("Publish to nexus") {
