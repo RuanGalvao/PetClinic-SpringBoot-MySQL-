@@ -23,7 +23,7 @@ pipeline {
         stage('Test') {
             
             steps {
-                sh 'mvn clean verify sonar:sonar -Dsonar.projectKey= -Dsonar.login=3ad8e0618a37ada06be74a4579d709ed777fac87 -DskipTests=true'
+                sh './mvnw sonar:sonar -Dsonar.projectKey=Petclinic -Dsonar.host.url=https://host.docker.internal:9000 -Dsonar.login=503661e9f8e64d476a491eff45c6489c95637506 -DskipTests=true'
             }
 	}
         stage("Publish to nexus") {
