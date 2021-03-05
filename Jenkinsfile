@@ -5,7 +5,7 @@ pipeline {
         NEXUS_PROTOCOL = "http"
         NEXUS_URL = "localhost:8081"
         NEXUS_REPOSITORY = "spring-petclinic"
-        NEXUS_CREDENTIAL_ID = "nexus-credentials"
+        NEXUS_CREDENTIAL_ID = "nexus"
     }
     stages {
         stage ('Checkout') {
