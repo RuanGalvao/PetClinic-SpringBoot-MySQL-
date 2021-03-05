@@ -19,12 +19,11 @@ pipeline {
                 sh 'mvn package -DskipTests=true'
             }
         }
+        
         stage('Test') {
-            steps{
-                sh 'mvn -s /root/.m2/settings.xml -version'
-            }
+            
             steps {
-                sh 'mvn clean verify sonar:sonar -Dsonar.login=3ad8e0618a37ada06be74a4579d709ed777fac87 -DskipTests=true'
+                sh 'mvn clean verify sonar:sonar -Dsonar.projectKey= -Dsonar.login=3ad8e0618a37ada06be74a4579d709ed777fac87 -DskipTests=true'
             }
 	}
         stage("Publish to nexus") {
