@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'mvn clean verify sonar:sonar -Dsonar.login=3ad8e0618a37ada06be74a4579d709ed777fac87 -DskipTests=true'   
+                sh 'mvn clean verify sonar:sonar -Dsonar.host.url=http://localhost:9000 -DskipTests=true'   
             }
 	}
         stage("Publish to nexus") {
