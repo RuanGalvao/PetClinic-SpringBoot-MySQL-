@@ -23,7 +23,7 @@ pipeline {
         stage('Test') {
             
             steps {
-                sh ' chmod + x mvnw '
+                sh ' chmod +x mvnw '
 
                 sh './mvnw sonar:sonar -Dsonar.projectKey=petclinic -Dsonar.host.url=https://host.docker.internal:9000 -Dsonar.login=503661e9f8e64d476a491eff45c6489c95637506'
             }
