@@ -22,8 +22,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-               withSonarQubeEnv('http://sonarqube:9000', installationName: 'My SonarQube Server') {
-                    sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
+                sh '/var/jenkins_home/sonar-scanner/bin/sonar-scanner'
                 }   
             }
 	}
