@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh '/var/jenkins_home/sonar-scanner/bin/sonar-scanner'   
+                sh 'mvn clean verify sonar:sonar -Dsonar.login=3ad8e0618a37ada06be74a4579d709ed777fac87'   
             }
 	}
         stage("Publish to nexus") {
