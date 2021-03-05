@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'   
+                sh 'mvn clean verify sonar:sonar -Dsonar.login=3ad8e0618a37ada06be74a4579d709ed777fac87'   
             }
 	}
         stage("Publish to nexus") {
