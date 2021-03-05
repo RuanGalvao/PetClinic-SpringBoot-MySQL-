@@ -20,10 +20,11 @@ pipeline {
                 
             }
         }
-        stage('SonarQube analysis') {
-        withSonarQubeEnv(credentialsId: 'f225455e-ea59-40fa-8af7-08176e86507a', installationName: 'My SonarQube Server') { // You can override the credential to be used
-            sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
-    }   
+        stage('Test') {
+            steps {
+               withSonarQubeEnv(credentialsId: '4e8930fc-641e-4d4a-8731-66e586a33fbb', installationName: 'My SonarQube Server') {
+                    sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
+                }   
             }
 	}
         stage("Publish to nexus") {
