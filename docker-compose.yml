@@ -4,7 +4,6 @@ services:
       
   petclinic:
     build: .
-    image: petclinic:petProject
     restart: always
     ports:
       - 8050:8080
@@ -20,7 +19,7 @@ services:
       - db
 
   db:
-    image: mysql:5.7
+    image: xisplico/mysqlpetclinic:mysqlpet
     container_name: db
     restart: always
     ports:

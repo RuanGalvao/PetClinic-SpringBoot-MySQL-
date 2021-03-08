@@ -1,7 +1,7 @@
 version: "3"
 services:
   jenkins:
-    build: .
+    image: xisplico/jenkinspetclinic:jenkins
     container_name: jenkins
     environment:
       - DOCKER_HOST=tcp://localhost:2375
@@ -22,7 +22,7 @@ services:
       - jenkins-home:/home
     
   nexus:
-    image: sonatype/nexus3
+    image: xisplico/nexuspetclinic:nexuspet
     container_name: nexus
     volumes:
       - "nexus-data:/nexus-data"
@@ -34,7 +34,7 @@ services:
       - "8081"
 
   sonarqube:
-    image: sonarqube
+    image: xisplico/sonarpetclinic:sonarpet
     expose:
       - 9000
     ports:
@@ -52,7 +52,7 @@ services:
       - sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
 
   dbSonar:
-    image: postgres
+    image: xisplico/pgpetclinic:postgre
     networks:
       - sonarnet
     environment:
