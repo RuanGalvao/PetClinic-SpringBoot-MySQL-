@@ -14,9 +14,8 @@ pipeline {
           }
         }
         stage('Build') {
-            //agent { docker 'maven:3.6-jdk-8' }
             steps {
-                sh 'mvn package'
+                sh 'mvn package -DskipTests=true'
             }
         }
         
@@ -24,9 +23,15 @@ pipeline {
             
             steps {
                 sh ' chmod +x mvnw '
-
+                sh 'mvn test'
                 sh './mvnw sonar:sonar -Dsonar.projectKey=petclinic -Dsonar.host.url=http://host.docker.internal:9000 -Dsonar.login=503661e9f8e64d476a491eff45c6489c95637506'
             }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml' 
+                }
+            }
+
 	}
         stage("Publish to nexus") {
             //when {
