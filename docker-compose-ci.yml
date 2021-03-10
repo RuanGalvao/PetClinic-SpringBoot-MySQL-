@@ -1,7 +1,7 @@
 version: "3"
 services:
   jenkins:
-    image: xisplico/jenkinspetclinic:jenkins
+    image: xisplico/jenkinscipetclinic:jenkins
     container_name: jenkins
     environment:
       - DOCKER_HOST=tcp://localhost:2375
