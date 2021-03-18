@@ -6,7 +6,7 @@ pipeline {
         NEXUS_URL = "nexus:8081"
         NEXUS_REPOSITORY = "spring-petclinic"
         NEXUS_CREDENTIAL_ID = "nexus-credentials"
-        VERSIONBUILD = "xisplico/petclinic:webapp"
+        
     }
     stages {
         stage ('Checkout') {
@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'docker build -t ${VERSIONBUILD} .'
+                sh 'docker build -t xisplico/petclinic:webapp .'
             }
         }
         
@@ -34,7 +34,7 @@ pipeline {
             //    branch 'master' 
             //}
             steps {
-                sh 'docker save ${VERSIONBUILD} > petclinic.tar '
+                sh 'docker save xisplico/petclinic:webapp > petclinic.tar '
                 /*script {
                     pom = readMavenPom file: "pom.xml";
                     filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
