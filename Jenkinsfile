@@ -16,7 +16,9 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'docker build -t xisplico/petclinic:webapp .'
+                script{
+                    docker.build -t xisplico/petclinic:webapp .
+                }
             }
         }
         
@@ -34,7 +36,9 @@ pipeline {
             //    branch 'master' 
             //}
             steps {
-                sh 'docker save xisplico/petclinic:webapp > petclinic.tar '
+                script{
+                    docker.save xisplico/petclinic:webapp > petclinic.tar 
+                }
                 /*script {
                     pom = readMavenPom file: "pom.xml";
                     filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
@@ -68,5 +72,4 @@ pipeline {
                 }
             }*/
         }
-    }
 }
