@@ -16,7 +16,7 @@ agent any
         }
         stage('Build') {
             steps {
-                sh 'docker build -t xisplico/petclinic:webapp '
+                sh 'docker build -t xisplico/petclinic:webapp .'
             }
         }
         
