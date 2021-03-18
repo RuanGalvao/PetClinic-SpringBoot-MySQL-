@@ -16,7 +16,7 @@ agent any
         }
         stage('Build') {
             steps {
-                sh 'mvn package -DskipTests=true'
+                sh 'docker build -t xisplico/petclinic:webapp '
             }
         }
         
