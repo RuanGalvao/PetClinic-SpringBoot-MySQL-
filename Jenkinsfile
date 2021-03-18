@@ -6,6 +6,7 @@ pipeline {
         NEXUS_URL = "nexus:8081"
         NEXUS_REPOSITORY = "spring-petclinic"
         NEXUS_CREDENTIAL_ID = "nexus-credentials"
+        VERSIONBUILD = "xisplico/petclinic:webapp"
     }
     stages {
         stage ('Checkout') {
@@ -15,7 +16,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'mvn package -DskipTests=true'
+                sh 'docker build -t ${VERSIONBUILD} .'
             }
         }
         
@@ -33,7 +34,8 @@ pipeline {
             //    branch 'master' 
             //}
             steps {
-                script {
+                sh 'docker save ${VERSIONBUILD} > petclinic.tar '
+                /*script {
                     pom = readMavenPom file: "pom.xml";
                     filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
                     echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
@@ -64,7 +66,7 @@ pipeline {
                         error "*** File: ${artifactPath}, could not be found";
                     }
                 }
-            }
+            }*/
         }
     }
 }
