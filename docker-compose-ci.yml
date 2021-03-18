@@ -2,9 +2,6 @@ version: "3"
 services:
   jenkins:
     image: xisplico/jenkinspet2teste:teste
-    build:
-      dockerfile: dockerfile
-      context: ./build
     container_name: jenkins
     environment:
       - DOCKER_HOST=tcp://localhost:2375
