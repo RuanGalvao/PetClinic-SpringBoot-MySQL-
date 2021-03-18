@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+agent any
     environment {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
@@ -16,9 +16,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                script{
-                    'docker build -t xisplico/petclinic:webapp .'
-                }
+                sh 'mvn package -DskipTests=true'
             }
         }
         
@@ -36,10 +34,7 @@ pipeline {
             //    branch 'master' 
             //}
             steps {
-                script{
-                    'docker save xisplico/petclinic:webapp > petclinic.tar '
-                }
-                /*script {
+                script {
                     pom = readMavenPom file: "pom.xml";
                     filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
                     echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
@@ -70,6 +65,8 @@ pipeline {
                         error "*** File: ${artifactPath}, could not be found";
                     }
                 }
-            }*/
+            }
         }
+    }
 }
+    
