@@ -5,7 +5,6 @@ services:
     build:
       dockerfile: dockerfile
       context: ./build
-      networks: host
     container_name: jenkins
     environment:
       - DOCKER_HOST=tcp://localhost:2375
