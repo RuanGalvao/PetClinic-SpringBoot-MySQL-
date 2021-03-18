@@ -17,7 +17,7 @@ pipeline {
         stage('Build') {
             steps {
                 script{
-                    docker.build -t xisplico/petclinic:webapp .
+                    docker build -t xisplico/petclinic:webapp .
                 }
             }
         }
@@ -37,7 +37,7 @@ pipeline {
             //}
             steps {
                 script{
-                    docker.save xisplico/petclinic:webapp > petclinic.tar 
+                    docker save xisplico/petclinic:webapp > petclinic.tar 
                 }
                 /*script {
                     pom = readMavenPom file: "pom.xml";
