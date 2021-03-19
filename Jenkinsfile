@@ -14,19 +14,29 @@ agent any
             git 'https://github.com/RuanGalvao/PetClinic-SpringBoot-MySQL-'
           }
         }
-        stage('Build') {
+        stage('Java Build') {
             steps {
-                sh 'docker build -t xisplico/petclinic:webapp .'
+                sh 'docker exec -dit -v .:/source  maven "mvn install -DskipTests"'
+            }
+        
+        stage('Unity Tests') {
+            steps {
+                sh 'mvn test -Dskiptests'
             }
         }
         
-        stage('Test') {
-            
+        stage('QA') {
             steps {
                 sh ' chmod +x mvnw '
                 
                 sh './mvnw sonar:sonar -Dsonar.projectKey=petclinic -Dsonar.host.url=http://host.docker.internal:9000 -Dsonar.login=503661e9f8e64d476a491eff45c6489c95637506'
             }
+        stage('Docker Build') {
+            steps {
+                sh 'docker build -t dockerImage-test:1.0 .'
+            }
+        }
+       
 
 	}
         stage("Publish to nexus") {
@@ -34,7 +44,8 @@ agent any
             //    branch 'master' 
             //}
             steps {
-                script {
+                sh 'docker push nexus:8081/spring-petclinic/repo/dockerImage-test:1.0"'
+                /*script {
                     pom = readMavenPom file: "pom.xml";
                     filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
                     echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
@@ -64,7 +75,7 @@ agent any
                     } else {
                         error "*** File: ${artifactPath}, could not be found";
                     }
-                }
+                }*/
             }
         }
     }
